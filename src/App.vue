@@ -1,11 +1,26 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import UsernameAvailability from "./components/UsernameAvailability.vue";
+import PasswordLogic from "./components/PasswordLogic.vue";
+import ConfirmMatchLogic from "./components/ConfirmMatchLogic.vue";
+import TextField from "./components/TextField.vue";
+import SubmitButton from "./components/SubmitButton.vue";
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
-</template>
+  <span>Username</span>
+  <TextField xr_key="usr"/>
+  <UsernameAvailability xr_key="usr-v" xu_input="usr"/>
+  <br>
 
-<style scoped></style>
+  <span>Password</span>
+  <TextField xr_key="pwd"/>
+  <PasswordLogic xr_key="pwd-v" xu_input="pwd"/>
+  <br>
+
+ <span>Confirm password</span>
+ <TextField xr_key="cfrm"/>
+ <ConfirmMatchLogic xr_key="cfrm-v" xu_original="pwd" xu_confirm="cfrm"/>
+ <br>
+ 
+ <SubmitButton xu_user="usr-v" xu_password="cfrm-v"/>
+</template>
