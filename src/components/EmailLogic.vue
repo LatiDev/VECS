@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { getComponent, registerComponent, unregisterComponent } from "../ComponentRegistry.js";
 import { onMounted, onUnmounted } from "vue";
+import { getComponent, registerComponent, unregisterComponent } from "../ComponentRegistry.js";
 import type { InputField } from "@/models/InputField.ts";
 import type { Validatable } from "@/models/Validatable.ts";
 
@@ -9,19 +9,15 @@ const props = defineProps({
   xu_input: { type: String, required: true },
 });
 
-const isValidFormat = function(value: string|null) {
-  if (!value) {
+const isValid = function(): boolean {
+  const { getValue } = getComponent<InputField>(props.xu_input);
+  const email = getValue();
+
+  if (!email) {
     return false;
   }
 
-  return /^[a-z0-9_]{3,20}$/.test(value);
-}
-
-const isValid = function(): boolean {
-  const { getValue:getUsername } = getComponent<InputField>(props.xu_input);
-  const username = getUsername();
-
-  return isValidFormat(username);
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 onMounted(() => { registerComponent<Validatable>(props.xr_key, { isValid }); });

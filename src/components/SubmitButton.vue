@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { NButton } from "naive-ui";
 import { getComponent } from "../ComponentRegistry.js";
 import type { Validatable } from "@/models/Validatable.ts";
 
@@ -26,5 +27,5 @@ async function onClick() {
 </script>
 
 <template>
-  <button v-on:click="onClick">Sign up</button>
+  <n-button type="primary" v-on:click="onClick">Sign up</n-button>
 </template>
